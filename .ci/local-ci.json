@@ -3,6 +3,28 @@
   "repository_kind": "content",
   "checks": [
     {
+      "id": "content-validator-regression",
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_validate_repository",
+        "-v"
+      ]
+    },
+    {
+      "id": "content-local-ci-regression",
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_local_ci",
+        "-v"
+      ]
+    },
+    {
       "id": "foundation-validation",
       "command": [
         "python",
