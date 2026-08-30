@@ -18,6 +18,10 @@ PLACEHOLDERS = tuple(
 )
 
 COMMON_REQUIRED = [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "QWEN.md",
     ".github/CODEOWNERS",
     ".github/PULL_REQUEST_TEMPLATE.md",
     ".github/ISSUE_TEMPLATE/config.yml",
@@ -31,6 +35,8 @@ COMMON_REQUIRED = [
     "SECURITY.md",
     "CONTRIBUTING.md",
     "repo-manifest.yaml",
+    ".ci/local-ci.json",
+    "tools/run_local_ci.py",
 ]
 
 REPO_REQUIRED = {
@@ -48,6 +54,9 @@ REPO_REQUIRED = {
         ".ai/README.md",
     ],
     "content": [
+        ".ai/README.md",
+        ".ai/preparation-handoff.md",
+        ".ai/repository-profile.json",
         "packs/README.md",
         "packs/common/README.md",
         "packs/capability/README.md",
@@ -103,6 +112,32 @@ def main() -> int:
     manifest = root / "repo-manifest.yaml"
     if manifest.exists() and "repository:" not in manifest.read_text(encoding="utf-8"):
         errors.append("repo-manifest.yaml lacks repository key")
+
+    if args.repo_kind == "content":
+        profile_path = root / ".ai" / "repository-profile.json"
+        if profile_path.is_file():
+            try:
+                profile = json.loads(profile_path.read_text(encoding="utf-8"))
+                if profile.get("canonical_repository") != "OSHEThai/oshe-platform":
+                    errors.append("content agent profile must resolve to OSHEThai/oshe-platform")
+                if profile.get("control_status") == "UNPINNED_PREPARATION_ONLY":
+                    if profile.get("canonical_ref") is not None:
+                        errors.append("un-pinned content profile must have canonical_ref null")
+                    if profile.get("dispatch_enabled") is not False:
+                        errors.append("un-pinned content profile must deny dispatch")
+                else:
+                    canonical_ref = profile.get("canonical_ref")
+                    if not isinstance(canonical_ref, str) or re.fullmatch(r"[0-9a-f]{40}", canonical_ref) is None:
+                        errors.append("content agent profile canonical_ref must be an exact lowercase 40-character commit SHA")
+                    if profile.get("dispatch_enabled") is not False:
+                        errors.append("content agent profile dispatch must remain disabled until runtime gates pass")
+                if set(profile.get("authority_basis") or []) != {"ADR-0005", "ADR-0006", "ADR-0007"}:
+                    errors.append("content agent profile authority basis must include ADR-0005 through ADR-0007")
+                workflow = profile.get("repository_workflow") or {}
+                if workflow.get("full_ci") != "MILESTONE_CLOSE_ONLY_LOCAL_THEN_GITHUB":
+                    errors.append("content agent profile must limit Full CI to Milestone closure, local then GitHub")
+            except json.JSONDecodeError as exc:
+                errors.append(f"invalid content agent profile JSON: {exc}")
 
     if errors:
         for error in errors:

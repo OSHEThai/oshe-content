@@ -33,6 +33,7 @@ TestResults/
 artifacts/
 .tmp/
 .cache/
+.local-ci/
 
 # AI execution state
 .ai/runs/

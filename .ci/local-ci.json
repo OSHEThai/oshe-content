@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "repository_kind": "content",
+  "checks": [
+    {
+      "id": "foundation-validation",
+      "command": [
+        "python",
+        "tools/validate_repository.py",
+        "--repo-kind",
+        "content"
+      ]
+    }
+  ]
+}
