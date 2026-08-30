@@ -1,0 +1,8 @@
+* @OSHEThai/content
+/schemas/ @OSHEThai/architecture @OSHEThai/content
+/packs/jurisdiction/ @OSHEThai/content @OSHEThai/security
+/packs/standards/ @OSHEThai/content
+/packs/industry/ @OSHEThai/content @OSHEThai/architecture
+/tests/ @OSHEThai/quality
+/.github/ @OSHEThai/engineering @OSHEThai/security
+/SECURITY.md @OSHEThai/security

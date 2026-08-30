@@ -1,0 +1,11 @@
+schema_version: 1.0.0
+repository: oshe-content
+authority: GITHUB_AFTER_INITIAL_MIGRATION
+pack_schema: schemas/pack.schema.json
+catalogs:
+  common: packs/common
+  capability: packs/capability
+  industry: packs/industry
+  jurisdiction: packs/jurisdiction
+  standards: packs/standards
+artifact_output: artifacts

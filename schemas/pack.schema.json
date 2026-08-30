@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oshe.example/schemas/pack.schema.json",
+  "title": "OSHE Content Pack Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pack_id",
+    "pack_type",
+    "version",
+    "title",
+    "status",
+    "compatibility",
+    "contents"
+  ],
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "pattern": "^PACK-[A-Z]+-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "pack_type": {
+      "enum": [
+        "COMMON",
+        "CAPABILITY",
+        "INDUSTRY",
+        "JURISDICTION",
+        "STANDARD",
+        "COMPANY_OVERLAY"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "UNDER_REVIEW",
+        "APPROVED",
+        "CURRENT",
+        "SUPERSEDED",
+        "WITHDRAWN",
+        "ARCHIVED"
+      ]
+    },
+    "compatibility": {
+      "type": "object",
+      "required": [
+        "platform"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "schema": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "contents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "rights": {
+      "type": "object"
+    },
+    "signatures": {
+      "type": "array"
+    }
+  }
+}
