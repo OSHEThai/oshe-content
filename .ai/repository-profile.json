@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "oshe-content-repository-profile",
+  "prepared_on_iso": "2026-08-30",
+  "prepared_on_display": "30-08-2026",
+  "canonical_repository": "OSHEThai/oshe-platform",
+  "canonical_controls_path": ".ai/",
+  "canonical_ref": "b9b86dcdcce85fc2bd2044a6f3038f1087ab7895",
+  "control_status": "PINNED_CANONICAL_CONTROLS_DISPATCH_DISABLED",
+  "dispatch_enabled": false,
+  "authority_basis": [
+    "ADR-0005",
+    "ADR-0006",
+    "ADR-0007"
+  ],
+  "preferred_role_ids": [
+    "documentation-configuration-agent",
+    "research-legal-content-agent",
+    "test-quality-agent",
+    "security-privacy-product-safety-agent",
+    "independent-review-challenge-agent",
+    "release-evidence-agent",
+    "implementation-customer-success-planning-agent"
+  ],
+  "preferred_specialist_profile_ids": [
+    "docs-content-pack-worker",
+    "accessibility-localization-specialist",
+    "content-governance-specialist",
+    "privacy-data-governance-specialist",
+    "github-manager"
+  ],
+  "required_skill_ids": [
+    "checklist-workflow-authoring",
+    "record-evidence-integrity",
+    "docs-from-diff",
+    "schema-contract-validation",
+    "accessibility-usability-review",
+    "localization-thai-english",
+    "content-provenance-legal-citation",
+    "privacy-impact-assessment",
+    "human-handoff",
+    "github-metadata-management",
+    "github-branch-pr-operations",
+    "github-release-operations",
+    "github-repository-administration"
+  ],
+  "allowed_data_classes_without_additional_approval": [
+    "PUBLIC",
+    "INTERNAL"
+  ],
+  "write_roots": [
+    "packs/",
+    "forms/",
+    "checklists/",
+    "signage/",
+    "translations/",
+    "schemas/",
+    "tests/",
+    "docs/"
+  ],
+  "forbidden_paths": [
+    ".git/",
+    ".ai/state/",
+    ".ai/runs/",
+    ".ai/transcripts/"
+  ],
+  "human_only_actions": [
+    "approve-or-publish-official-legal-or-safety-critical-content",
+    "approve-provider-route-or-expanded-data-class",
+    "accept-residual-risk",
+    "organization-account-ownership-billing-succession-or-recovery",
+    "non-github-production-deployment-without-separate-authority"
+  ],
+  "repository_workflow": {
+    "out_of_issue_work": "OPEN_PULL_REQUEST_AS_PRIMARY_AUDIT_RECORD",
+    "ci_primary_environment": "LOCAL",
+    "incremental_ci": "BATCH_ALL_APPLICABLE_CHECKS_WITH_CHECKPOINTS",
+    "github_ci_prerequisite": "LOCAL_INCREMENTAL_PASS",
+    "full_ci": "MILESTONE_CLOSE_ONLY_LOCAL_THEN_GITHUB",
+    "delete_merged_or_safely_abandoned_branches": true,
+    "cleanup_unreferenced_outputs_after_task": true
+  }
+}
