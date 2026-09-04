@@ -116,6 +116,46 @@ class ContentValidatorFixtureTests(unittest.TestCase):
                 self._write_json(relative_path, {})
             else:
                 self._write_text(relative_path, "fixture\n")
+        self._write_text("LICENSE", "Apache-2.0 fixture text\n")
+        self._write_text("DCO-1.1.txt", "DCO fixture text\n")
+        self._write_text("NOTICE.md", "Notice fixture\n")
+        for license_id in ("Apache-2.0", "CC-BY-4.0", "CC-BY-SA-4.0"):
+            self._write_text(f"LICENSES/{license_id}.txt", "license fixture\n")
+        self._write_json(
+            "RIGHTS-METADATA.json",
+            {
+                "schema_version": "1.0.0",
+                "repository": "OSHEThai/oshe-content",
+                "licensor": "OSHEThai",
+                "root_license": "Apache-2.0",
+                "rules": [
+                    {
+                        "path": "LICENSE",
+                        "classification": "THIRD_PARTY_STANDARD_TEXT",
+                        "license": "Apache-2.0",
+                        "source": "fixture",
+                    },
+                    {
+                        "path": "LICENSES/**",
+                        "classification": "THIRD_PARTY_STANDARD_TEXT",
+                        "license": "SPDX_STANDARD_TEXT",
+                        "source": "fixture",
+                    },
+                    {
+                        "path": "DCO-1.1.txt",
+                        "classification": "THIRD_PARTY_STANDARD_TEXT",
+                        "license": "DCO-1.1",
+                        "source": "fixture",
+                    },
+                    {
+                        "path": "**",
+                        "classification": "OSHE_AUTHORED_PRACTICAL_CONTENT",
+                        "license": "CC-BY-SA-4.0",
+                        "copyright": "OSHEThai",
+                    },
+                ],
+            },
+        )
 
     def _run_validator(self) -> subprocess.CompletedProcess[str]:
         environment = os.environ.copy()
@@ -178,6 +218,14 @@ class ContentValidatorFixtureTests(unittest.TestCase):
 
         self.assertNotEqual(completed.returncode, 0)
         self.assertIn("missing required path: README.md", completed.stderr)
+
+    def test_missing_rights_metadata_fails_closed(self) -> None:
+        (self.root / "RIGHTS-METADATA.json").unlink()
+
+        completed = self._run_validator()
+
+        self.assertNotEqual(completed.returncode, 0)
+        self.assertIn("missing licensing control: RIGHTS-METADATA.json", completed.stderr)
 
     def test_missing_content_required_file_fails(self) -> None:
         (self.root / "packs/common/README.md").unlink()
