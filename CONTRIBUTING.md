@@ -13,6 +13,13 @@ All changes enter through a pull request. Link an existing governing Issue when 
 7. Resolve review findings and required checks. Use Full CI only for Milestone closure, locally first and then on GitHub.
 8. Merge only through the canonical ADR-0006 evidence gate. Delete the merged head branch and clean unreferenced worktrees, branches, caches, logs, downloads, and failed outputs.
 
+## Developer Certificate of Origin
+
+Contributions are inbound-equals-outbound under the file's declared license.
+Contributors must certify [DCO 1.1](DCO-1.1.txt) with a `Signed-off-by:` line
+in each commit. Do not submit third-party material unless its provenance and
+rights metadata are recorded and compatible.
+
 ## Prohibited
 
 - production credentials or customer data;

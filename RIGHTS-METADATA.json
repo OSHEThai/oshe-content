@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "repository": "OSHEThai/oshe-content",
+  "licensor": "OSHEThai",
+  "root_license": "Apache-2.0",
+  "rules": [
+    {"path": "LICENSE", "classification": "THIRD_PARTY_STANDARD_TEXT", "license": "Apache-2.0", "source": "https://spdx.org/licenses/Apache-2.0.html"},
+    {"path": "LICENSES/**", "classification": "THIRD_PARTY_STANDARD_TEXT", "license": "SPDX_STANDARD_TEXT", "source": "SPDX and Creative Commons standard license texts"},
+    {"path": "DCO-1.1.txt", "classification": "THIRD_PARTY_STANDARD_TEXT", "license": "DCO-1.1", "source": "https://developercertificate.org/"},
+    {"path": ".ai/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": ".ci/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": ".github/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": "schemas/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": "tests/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": "tools/**", "classification": "CODE_TOOL_SCHEMA_TEST_AUTOMATION", "license": "Apache-2.0", "copyright": "OSHEThai"},
+    {"path": "content-manifest.yaml", "classification": "OSHE_AUTHORED_METADATA_OR_MAPPING", "license": "CC-BY-4.0", "copyright": "OSHEThai"},
+    {"path": "repo-manifest.yaml", "classification": "OSHE_AUTHORED_METADATA_OR_MAPPING", "license": "CC-BY-4.0", "copyright": "OSHEThai"},
+    {"path": "RIGHTS-METADATA.json", "classification": "OSHE_AUTHORED_METADATA_OR_MAPPING", "license": "CC-BY-4.0", "copyright": "OSHEThai"},
+    {"path": "**", "classification": "OSHE_AUTHORED_PRACTICAL_CONTENT", "license": "CC-BY-SA-4.0", "copyright": "OSHEThai"}
+  ],
+  "unknown_rights": "FAIL_CLOSED"
+}
